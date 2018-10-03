@@ -1,0 +1,8 @@
+hash: 1c3e018616ba147798ab3bf09ecbf17cd3b5556dfa0623063ad1d686613b3375
+updated: 2018-10-03T07:59:07.292937+02:00
+imports:
+- name: github.com/go-chi/chi
+  version: b5294d10673813fac8558e7f47242bc9e61b4c25
+- name: github.com/go-chi/render
+  version: 3215478343fbc559bd3fc08f7031bb134d6bdad5
+testImports: []

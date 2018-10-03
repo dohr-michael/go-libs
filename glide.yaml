@@ -1,0 +1,6 @@
+package: github.com/dohr-michael/go-libs
+import:
+- package: github.com/go-chi/chi
+  version: v3.3.3
+- package: github.com/go-chi/render
+  version: v1.0.1
