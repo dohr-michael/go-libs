@@ -36,7 +36,7 @@ func ReadRepository(ctx context.Context) storage.ReadRepository {
 }
 
 func WriteRepository(ctx context.Context) storage.WriteRepository {
-	return ctx.Value(ReadRepositoryCtx).(storage.WriteRepository)
+	return ctx.Value(WriteRepositoryCtx).(storage.WriteRepository)
 }
 
 func FindManyRequest(ctx context.Context) *filters.Query {
