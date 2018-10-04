@@ -95,7 +95,7 @@ func readId(next http.Handler) http.Handler {
 func parseCreatePayload(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
-		req := CreateFactory(ctx)
+		req := CreateFactory(ctx)()
 		decoder := json.NewDecoder(r.Body)
 		err := decoder.Decode(req)
 		if err != nil {
@@ -111,7 +111,7 @@ func parseCreatePayload(next http.Handler) http.Handler {
 func parseUpdatePayload(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
-		req := UpdateFactory(ctx)
+		req := UpdateFactory(ctx)()
 		decoder := json.NewDecoder(r.Body)
 		err := decoder.Decode(req)
 		if err != nil {
