@@ -8,7 +8,7 @@ import (
 type ID string
 
 type Paged struct {
-	Items []interface{}  `json:"items"`
+	Items interface{}    `json:"items"`
 	Total int64          `json:"total"`
 	Query *filters.Query `json:"query"`
 }
