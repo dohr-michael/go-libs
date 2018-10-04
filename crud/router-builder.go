@@ -75,15 +75,18 @@ func (h *RouterBuilder) WithDelete(fn http.HandlerFunc) *RouterBuilder {
 	return h
 }
 
+func (h *RouterBuilder) AppendRoutes(r chi.Router) {
+	baseMiddleware := withBuilder(h)
+	r.With(baseMiddleware, parseQuery).Get("/", h.fetchMany)
+	r.With(baseMiddleware, readId).Get("/{id}", h.fetchOne)
+	r.With(baseMiddleware, parseCreatePayload).Post("/", h.create)
+	r.With(baseMiddleware, readId, parseUpdatePayload).Put("/{id}", h.update)
+	r.With(baseMiddleware, readId).Delete("/{id}", h.delete)
+}
+
 func (h *RouterBuilder) Router(prefix string, mux *chi.Mux) chi.Router {
 	return mux.Route("/"+strings.TrimPrefix(prefix, "/"), func(r chi.Router) {
-		baseMiddleware := withBuilder(h)
-
-		r.With(baseMiddleware, parseQuery).Get("/", h.fetchMany)
-		r.With(baseMiddleware, readId).Get("/{id}", h.fetchOne)
-		r.With(baseMiddleware, parseCreatePayload).Post("/", h.create)
-		r.With(baseMiddleware, readId, parseUpdatePayload).Put("/{id}", h.update)
-		r.With(baseMiddleware, readId).Delete("/{id}", h.delete)
+		h.AppendRoutes(r)
 	})
 }
 
