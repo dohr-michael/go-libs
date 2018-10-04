@@ -28,6 +28,8 @@ func ToRenderer(err error) render.Renderer {
 	switch err.(type) {
 	case *notFoundError:
 		return NotFoundRenderer
+	case *illegalEntityError:
+		return InvalidRequestRenderer(err)
 	}
 	return InternalServerErrorRenderer(err)
 }
