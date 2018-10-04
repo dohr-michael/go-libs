@@ -13,7 +13,7 @@ import (
 
 // Props Contexts
 const CreateFactoryCtx = "crud.CreateFactoryCtx"
-const UpdateFactoryCtx = "crud.CreateFactoryCtx"
+const UpdateFactoryCtx = "crud.UpdateFactoryCtx"
 const ReadRepositoryCtx = "crud.ReadRepositoryCtx"
 const WriteRepositoryCtx = "crud.WriteRepositoryCtx"
 
