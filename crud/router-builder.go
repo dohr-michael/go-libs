@@ -2,12 +2,13 @@ package crud
 
 import (
 	"github.com/dohr-michael/go-libs/storage"
-	"net/http"
+	"github.com/dohr-michael/go-libs/errors"
 	"github.com/go-chi/chi"
+	"github.com/go-chi/render"
+	"net/http"
 	"strings"
 	"context"
-	"github.com/go-chi/render"
-	"github.com/dohr-michael/go-libs/errors"
+	"gopkg.in/asaskevich/govalidator.v4"
 )
 
 type Factory func() interface{}
@@ -122,6 +123,13 @@ func defaultFetchOne(w http.ResponseWriter, r *http.Request) {
 func defaultCreate(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	payload := CreatePayload(ctx)
+
+	_, err := govalidator.ValidateStruct(payload)
+	if err != nil {
+		render.Render(w, r, errors.ToRenderer(err))
+		return
+	}
+
 	id, res, err := WriteRepository(ctx).Create(payload, ctx)
 	if err != nil {
 		render.Render(w, r, errors.ToRenderer(err))
@@ -134,6 +142,13 @@ func defaultUpdate(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	payload := UpdatePayload(ctx)
 	id := Id(ctx)
+
+	_, err := govalidator.ValidateStruct(payload)
+	if err != nil {
+		render.Render(w, r, errors.ToRenderer(err))
+		return
+	}
+
 	res, err := WriteRepository(ctx).Update(id, payload, ctx)
 	if err != nil {
 		render.Render(w, r, errors.ToRenderer(err))

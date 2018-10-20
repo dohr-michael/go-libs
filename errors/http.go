@@ -3,6 +3,7 @@ package errors
 import (
 	"net/http"
 	"github.com/go-chi/render"
+	"gopkg.in/asaskevich/govalidator.v4"
 )
 
 // HttpResponse renderer type for handling all sorts of errors.
@@ -29,6 +30,10 @@ func ToRenderer(err error) render.Renderer {
 	case *notFoundError:
 		return NotFoundRenderer
 	case *illegalEntityError:
+		return InvalidRequestRenderer(err)
+	case *govalidator.Error:
+		return InvalidRequestRenderer(err)
+	case *govalidator.Errors:
 		return InvalidRequestRenderer(err)
 	}
 	return InternalServerErrorRenderer(err)

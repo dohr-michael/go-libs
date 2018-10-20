@@ -4,3 +4,5 @@ import:
   version: v3.3.3
 - package: github.com/go-chi/render
   version: v1.0.1
+- package: gopkg.in/asaskevich/govalidator.v4
+  version: v9

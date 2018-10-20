@@ -5,8 +5,6 @@ import (
 	"github.com/dohr-michael/go-libs/filters"
 )
 
-type ID string
-
 type Paged struct {
 	Items interface{}    `json:"items"`
 	Total int64          `json:"total"`
@@ -14,6 +12,6 @@ type Paged struct {
 }
 
 type ReadRepository interface {
-	FetchOne(id ID, ctx context.Context) (interface{}, error)
+	FetchOne(id string, ctx context.Context) (interface{}, error)
 	FetchMany(query *filters.Query, ctx context.Context) (*Paged, error)
 }

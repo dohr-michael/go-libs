@@ -1,8 +1,10 @@
-hash: 1c3e018616ba147798ab3bf09ecbf17cd3b5556dfa0623063ad1d686613b3375
-updated: 2018-10-03T07:59:07.292937+02:00
+hash: a090734770e69feca3bc09648c38c91be766f50a116e8e8a05d9b6dcb4a6bb37
+updated: 2018-10-20T07:17:36.113073+02:00
 imports:
 - name: github.com/go-chi/chi
   version: b5294d10673813fac8558e7f47242bc9e61b4c25
 - name: github.com/go-chi/render
   version: 3215478343fbc559bd3fc08f7031bb134d6bdad5
+- name: gopkg.in/asaskevich/govalidator.v4
+  version: ccb8e960c48f04d6935e72476ae4a51028f9e22f
 testImports: []

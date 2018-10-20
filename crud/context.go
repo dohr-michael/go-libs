@@ -1,14 +1,14 @@
 package crud
 
 import (
-	"net/http"
 	"github.com/dohr-michael/go-libs/filters"
-	"github.com/go-chi/render"
 	"github.com/dohr-michael/go-libs/errors"
 	"github.com/dohr-michael/go-libs/storage"
+	"github.com/go-chi/render"
 	"github.com/go-chi/chi"
 	"context"
 	"encoding/json"
+	"net/http"
 )
 
 // Props Contexts
@@ -51,8 +51,8 @@ func UpdatePayload(ctx context.Context) interface{} {
 	return ctx.Value(UpdatePayloadCtx)
 }
 
-func Id(ctx context.Context) storage.ID {
-	return ctx.Value(IdCtx).(storage.ID)
+func Id(ctx context.Context) string {
+	return ctx.Value(IdCtx).(string)
 }
 
 func withBuilder(builder *RouterBuilder) func(http.Handler) http.Handler {
@@ -82,7 +82,7 @@ func parseQuery(next http.Handler) http.Handler {
 
 func readId(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		id := storage.ID(chi.URLParam(r, "id"))
+		id := string(chi.URLParam(r, "id"))
 		if id == "" {
 			render.Render(w, r, errors.NotFoundRenderer)
 			return
