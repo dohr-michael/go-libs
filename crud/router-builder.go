@@ -124,8 +124,8 @@ func defaultCreate(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	payload := CreatePayload(ctx)
 
-	_, err := govalidator.ValidateStruct(payload)
-	if err != nil {
+	ok, err := govalidator.ValidateStruct(payload)
+	if err != nil || !ok {
 		render.Render(w, r, errors.ToRenderer(err))
 		return
 	}
@@ -143,8 +143,8 @@ func defaultUpdate(w http.ResponseWriter, r *http.Request) {
 	payload := UpdatePayload(ctx)
 	id := Id(ctx)
 
-	_, err := govalidator.ValidateStruct(payload)
-	if err != nil {
+	ok, err := govalidator.ValidateStruct(payload)
+	if err != nil || !ok {
 		render.Render(w, r, errors.ToRenderer(err))
 		return
 	}

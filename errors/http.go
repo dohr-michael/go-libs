@@ -31,9 +31,9 @@ func ToRenderer(err error) render.Renderer {
 		return NotFoundRenderer
 	case *illegalEntityError:
 		return InvalidRequestRenderer(err)
-	case *govalidator.Error:
+	case *govalidator.Error, govalidator.Error:
 		return InvalidRequestRenderer(err)
-	case *govalidator.Errors:
+	case *govalidator.Errors, govalidator.Errors:
 		return InvalidRequestRenderer(err)
 	}
 	return InternalServerErrorRenderer(err)
