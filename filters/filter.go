@@ -1,3 +1,5 @@
 package filters
 
-type Filter interface{}
+import "github.com/dohrm/go-rsql"
+
+type Filter rsql.Expression

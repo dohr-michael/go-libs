@@ -3,6 +3,7 @@ package filters
 import (
 	"net/url"
 	"strconv"
+	"github.com/dohrm/go-rsql"
 )
 
 type Query struct {
@@ -33,7 +34,11 @@ func ParseHttpValues(base url.Values) (*Query, error) {
 			}
 			res.Pager.Offset = offset
 		case k == "_q":
-			res.Filter = v[0]
+			filter, err := rsql.Parse(v[0])
+			if err != nil {
+				return nil, err
+			}
+			res.Filter = filter
 		}
 
 	}
