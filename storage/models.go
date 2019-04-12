@@ -2,7 +2,9 @@ package storage
 
 import "github.com/dohr-michael/go-libs/filters"
 
-type Entity interface{}
+type Entity interface {
+	Id() string
+}
 type Entities []Entity
 
 type Paged struct {
