@@ -2,10 +2,8 @@ package storage
 
 import "github.com/dohr-michael/go-libs/filters"
 
-type Entity interface {
-	Id() string
-}
-type Entities []Entity
+type Entity interface{}
+type Entities interface{}
 
 type Paged struct {
 	Items Entities       `json:"items"`
