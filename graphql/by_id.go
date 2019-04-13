@@ -3,6 +3,7 @@ package graphql
 import (
 	"errors"
 	"fmt"
+	lerrors "github.com/dohr-michael/go-libs/errors"
 	"github.com/dohr-michael/go-libs/storage"
 	"github.com/graphql-go/graphql"
 )
@@ -20,7 +21,13 @@ func ById(fieldId string, baseType *graphql.Object, repoContextKey string) *grap
 			if !ok {
 				return nil, errors.New(fmt.Sprintf("%s is not set", repoContextKey))
 			}
-			return repo.FetchOne(p.Args[fieldId].(string), p.Context)
+			res, err := repo.FetchOne(p.Args[fieldId].(string), p.Context)
+			if err == lerrors.NotFoundError {
+				return nil, nil
+			} else if err != nil {
+				return nil, err
+			}
+			return res, nil
 		},
 	}
 }
